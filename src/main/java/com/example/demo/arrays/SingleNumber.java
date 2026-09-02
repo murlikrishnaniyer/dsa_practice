@@ -1,24 +1,25 @@
 package com.example.demo.arrays;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.function.Function;import java.util.stream.Collectors;
 
 public class SingleNumber {
     public static void main(String[] args) {
-        int[] arr = {4,1,2,1,2};
-        int n = arr.length;
-        int target =4;
-        Map<Integer, Integer> freq = new HashMap<>();
-        for (int i = 0; i < n; i++) {
-            if (freq.containsKey(arr[i])) {freq.put(arr[i], freq.get(arr[i]) + 1);}
-            else {freq.put(arr[i], 1);}
-        }
-        for (int i = 0; i < freq.size(); i++) {
-            if (freq.get(arr[i])==1) {
-                System.out.println(arr[i]);
+        int[] arr = {4, 1, 2, 1, 2};
 
-            }
-        }
+        // Approach 1: XOR using streams (works when every other element appears exactly twice)
+        int singleByXor = Arrays.stream(arr).reduce(0, (a, b) -> a ^ b);
+        System.out.println("Single (XOR): " + singleByXor);
 
+        // Approach 2: Using streams + grouping to find element with frequency 1 (general and safe)
+        Map<Integer, Long> freq = Arrays.stream(arr)
+                .boxed()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        freq.entrySet().stream()
+                .filter(e -> e.getValue() == 1)
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .ifPresent(v -> System.out.println("Single (grouping): " + v));
     }
 }

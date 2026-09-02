@@ -4,7 +4,7 @@ public class FirstAndLastPositionBinarySearchAlgo {
 
     public static void main(String[] args) {
         FirstAndLastPositionBinarySearchAlgo sol = new FirstAndLastPositionBinarySearchAlgo();
-        int[] nums = {5, 7, 7, 8, 8, 10};
+        int[] nums = {5, 7, 7, 8, 9, 10};
         int target = 8;
 
         int[] bounds = sol.searchRange(nums, target);

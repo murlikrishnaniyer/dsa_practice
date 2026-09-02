@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class TopKFreqWords {
     public static void main(String[] args) {
 
-        String [] str={"i","love","leetcode","i","love","coding"};
+        String [] str={"i","love","leetcode","i","love","love","coding"};
         Map<String, Long> collect = Arrays.stream(str).
                 collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println(collect);
